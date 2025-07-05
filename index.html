@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collection Milano - Maison de Valois</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Styles communs */
+        :root {
+            --couleur-primaire: #d4b996;
+            --couleur-secondaire: #5d4037;
+            --couleur-accent: #c19a6b;
+            --couleur-texte: #333;
+            --couleur-fond: #f9f5f0;
+            --couleur-blanc: #ffffff;
+            --couleur-noir: #1a1a1a;
+            --couleur-or: #c1a06b;
+            --couleur-argent: #c0c0c0;
+            --transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--couleur-texte);
+            background-color: var(--couleur-fond);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        /* Header identique */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+        
+        header.scrolled {
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--couleur-blanc);
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--couleur-accent);
+            margin: 0 3px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 40px;
+            position: relative;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--couleur-blanc);
+            font-weight: 400;
+            font-size: 16px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--couleur-accent);
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover {
+            color: var(--couleur-accent);
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        .nav-icons {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .nav-icons a {
+            color: var(--couleur-blanc);
+            font-size: 18px;
+            transition: var(--transition);
+        }
+        
+        .nav-icons a:hover {
+            color: var(--couleur-accent);
+            transform: translateY(-2px);
+        }
+        
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--couleur-blanc);
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Hero Section Milano */
+        .milano-hero {
+            height: 60vh;
+            background: url('https://images.unsplash.com/photo-1523359346063-d879354c0ea5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            margin-top: 80px;
+        }
+        
+        .milano-hero .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .milano-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .milano-hero-content h1 {
+            font-size: 4.5rem;
+            color: var(--couleur-blanc);
+            margin-bottom: 20px;
+        }
+        
+        .milano-hero-content p {
+            font-size: 1.5rem;
+            color: var(--couleur-blanc);
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+        
+        /* Section Présentation Collection */
+        .collection-presentation {
+            padding: 80px 0;
+            background: var(--couleur-blanc);
+        }
+        
+        .presentation-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .presentation-image {
+            position: relative;
+            height: 500px;
+        }
+        
+        .presentation-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .presentation-text h2 {
+            font-size: 2.5rem;
+            color: var(--couleur-secondaire);
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .presentation-text h2:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 80px;
+            height: 2px;
+            background: var(--couleur-accent);
+        }
+        
+        .presentation-text p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+        
+        .signature {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            margin-top: 30px;
+            color: var(--couleur-accent);
+        }
+        
+        /* Section Produits */
+        .produits-section {
+            padding: 80px 0;
+            background: var(--couleur-fond);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.8rem;
+            color: var(--couleur-secondaire);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h2:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+            background: var(--couleur-accent);
+        }
+        
+        .produits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .produit-card {
+            background: var(--couleur-blanc);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .produit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .produit-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--couleur-accent);
+            color: white;
+            padding: 5px 15px;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            z-index: 2;
+        }
+        
+        .produit-image {
+            height: 350px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .produit-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .produit-card:hover .produit-image img {
+            transform: scale(1.05);
+        }
+        
+        .produit-content {
+            padding: 25px;
+        }
+        
+        .produit-content h3 {
+            font-size: 1.5rem;
+            color: var(--couleur-secondaire);
+            margin-bottom: 10px;
+        }
+        
+        .produit-content .description {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            min-height: 60px;
+        }
+        
+        .produit-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .produit-prix {
+            font-weight: 500;
+            color: var(--couleur-secondaire);
+            font-size: 1.2rem;
+        }
+        
+        .produit-link {
+            display: inline-block;
+            background: var(--couleur-accent);
+            color: white;
+            padding: 10px 25px;
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+        
+        .produit-link:hover {
+            background: var(--couleur-secondaire);
+        }
+        
+        /* Section Collaboration */
+        .collaboration-section {
+            padding: 80px 0;
+            background: var(--couleur-blanc);
+        }
+        
+        .collaboration-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .collaboration-text h2 {
+            font-size: 2.5rem;
+            color: var(--couleur-secondaire);
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .collaboration-text h2:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 80px;
+            height: 2px;
+            background: var(--couleur-accent);
+        }
+        
+        .collaboration-text p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+        
+        .collaboration-image {
+            position: relative;
+            height: 500px;
+        }
+        
+        .collaboration-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Footer identique */
+        footer {
+            background: var(--couleur-noir);
+            color: var(--couleur-blanc);
+            padding: 70px 0 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-col h3 {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--couleur-accent);
+        }
+        
+        .footer-col p, .footer-col li {
+            color: #aaa;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--couleur-accent);
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--couleur-accent);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #777;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .presentation-container, .collaboration-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .presentation-image, .collaboration-image {
+                height: 400px;
+            }
+            
+            .milano-hero-content h1 {
+                font-size: 3.5rem;
+            }
+            
+            nav ul li {
+                margin-left: 25px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(26, 26, 26, 0.95);
+                flex-direction: column;
+                padding: 20px 0;
+                text-align: center;
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+            }
+            
+            .milano-hero-content h1 {
+                font-size: 2.8rem;
+            }
+            
+            .produits-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .milano-hero-content h1 {
+                font-size: 2.3rem;
+            }
+            
+            .container {
+                padding: 0 20px;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header identique -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="#" class="logo">VALOIS<span>•</span>PARIS</a>
+            
+            <nav>
+                <ul id="nav-menu">
+                    <li><a href="accueil.html">Accueil</a></li>
+                    <li><a href="histoire.html">Notre Histoire</a></li>
+                    <li><a href="collection.html">Collections</a></li>
+                    <li><a href="competence.html">Savoir-Faire</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="nav-icons">
+                <a href="#"><i class="fas fa-search"></i></a>
+                <a href="#"><i class="fas fa-shopping-bag"></i></a>
+                <button class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section Milano -->
+    <section class="milano-hero">
+        <div class="overlay"></div>
+        <div class="milano-hero-content">
+            <h1>Milano</h1>
+            <p>Où le chic français rencontre l'élégance italienne</p>
+        </div>
+    </section>
+
+    <!-- Section Présentation Collection -->
+    <section class="collection-presentation">
+        <div class="container">
+            <div class="presentation-container">
+                <div class="presentation-image">
+                    <img src="https://images.unsplash.com/photo-1523359346063-d879354c0ea5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" alt="Collection Milano">
+                </div>
+                <div class="presentation-text">
+                    <h2>L'Esprit Milano</h2>
+                    <p>La collection Milano est née de la rencontre entre nos ateliers parisiens et le savoir-faire milanais. Une fusion unique qui allie la rigueur française à l'audace italienne, créant des pièces à la fois sophistiquées et décontractées.</p>
+                    <p>Nous avons sélectionné des cuirs italiens exceptionnels, réputés pour leur souplesse et leur lustre naturel. Les teintes chaudes et profondes évoquent les palais milanais, tandis que les silhouettes restent fidèles à l'élégance parisienne.</p>
+                    <p>Cette édition limitée de 5 pièces représente le meilleur des deux cultures, avec une attention particulière portée aux détails et à la fonctionnalité.</p>
+                    <p class="signature">- Marco Bellini & Sophie Valois, Créateurs</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Produits -->
+    <section class="produits-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Les Pièces Exclusives</h2>
+                <p>Découvrez les sacs uniques de la collection Milano</p>
+            </div>
+            
+            <div class="produits-grid">
+                <!-- Produit 1 -->
+                <div class="produit-card">
+                    <div class="produit-badge">Édition limitée</div>
+                    <div class="produit-image">
+                        <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" alt="Milano Classico">
+                    </div>
+                    <div class="produit-content">
+                        <h3>Milano Classico</h3>
+                        <div class="description">Le sac iconique de la collection, en cuir pleine fleur italien avec ses détails métalliques brossés. Disponible en 3 coloris.</div>
+                        <div class="produit-meta">
+                            <span class="produit-prix">2 850 €</span>
+                            <a href="produit-milano-classico.html" class="produit-link">Découvrir</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Produit 2 -->
+                <div class="produit-card">
+                    <div class="produit-image">
+                        <img src="https://images.unsplash.com/photo-1592078615290-033ee584e267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" alt="Milano Sera">
+                    </div>
+                    <div class="produit-content">
+                        <h3>Milano Sera</h3>
+                        <div class="description">Clutch du soir en velours et cuir, ornée d'un fermoir inspiré des bijoux milanais des années 70.</div>
+                        <div class="produit-meta">
+                            <span class="produit-prix">2 150 €</span>
+                            <a href="produit-milano-sera.html" class="produit-link">Découvrir</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Produit 3 -->
+                <div class="produit-card">
+                    <div class="produit-badge">Nouveauté</div>
+                    <div class="produit-image">
+                        <img src="https://images.unsplash.com/photo-1587017539504-67cfbddac569?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" alt="Milano Viaggio">
+                    </div>
+                    <div class="produit-content">
+                        <h3>Milano Viaggio</h3>
+                        <div class="description">Sac de voyage en cuir souple avec bandoulière amovible et multiples compartiments pratiques.</div>
+                        <div class="produit-meta">
+                            <span class="produit-prix">3 450 €</span>
+                            <a href="produit-milano-viaggio.html" class="produit-link">Découvrir</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Produit 4 -->
+                <div class="produit-card">
+                    <div class="produit-image">
+                        <img src="https://images.unsplash.com/photo-1591348122449-8af5c4f345c2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" alt="Milano Piccolo">
+                    </div>
+                    <div class="produit-content">
+                        <h3>Milano Piccolo</h3>
+                        <div class="description">Version mini du Milano Classico, parfait pour les journées urbaines. Chaîne dorée ajustable.</div>
+                        <div class="produit-meta">
+                            <span class="produit-prix">2 250 €</span>
+                            <a href="produit-milano-piccolo.html" class="produit-link">Découvrir</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Collaboration -->
+    <section class="collaboration-section">
+        <div class="container">
+            <div class="collaboration-content">
+                <div class="collaboration-text">
+                    <h2>Une Collaboration Exclusive</h2>
+                    <p>La collection Milano est le fruit d'une collaboration inédite entre la Maison Valois et l'atelier milanais Bellini, fondé en 1948.</p>
+                    <p>Pendant 18 mois, nos artisans ont travaillé ensemble pour créer des pièces qui capturent l'essence des deux maisons. Les cuirs sont sélectionnés dans les meilleures tanneries italiennes, tandis que les motifs et les finitions reflètent le savoir-faire français.</p>
+                    <p>Chaque sac est marqué des deux signatures - Valois et Bellini - symbolisant cette alliance unique entre Paris et Milan.</p>
+                </div>
+                <div class="collaboration-image">
+                    <img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" alt="Collaboration Valois-Bellini">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer identique -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Maison Valois</h3>
+                    <p>Créations d'exception en maroquinerie de luxe depuis 1925. Où l'artisanat italien rencontre l'élégance française.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Personnalisation sur mesure</a></li>
+                        <li><a href="#">Restauration de pièces anciennes</a></li>
+                        <li><a href="#">Conseils d'entretien</a></li>
+                        <li><a href="#">Programme de fidélité</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> contact@maisonvalois.com</p>
+                    <p><i class="fas fa-phone"></i> +33 1 45 62 78 90</p>
+                    <p><i class="fas fa-clock"></i> Lun-Sam : 10h-19h</p>
+                    <p><i class="fas fa-calendar"></i> Prendre rendez-vous</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 Maison Valois. Tous droits réservés. | Créations Franco-Italiennes depuis 1925
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu hamburger
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('show');
+        });
+        
+        // Animation du header au défilement
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
